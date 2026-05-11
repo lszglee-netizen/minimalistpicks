@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minimalist Picks - Quiet Essentials for Simple Living</title>
+<meta name="description" content="Curated minimalist essentials. Clean, intentional, peaceful products for a clutter-free life.">
+<meta name="keywords" content="minimalist picks, minimalist essentials, quiet lifestyle, simple living">
+<meta property="og:title" content="Minimalist Picks">
+<meta property="og:description" content="Curated minimalist essentials. Clean, intentional, peaceful products for a clutter-free life.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org/",
+  "@type":"Review",
+  "itemReviewed":{"@type":"Product","name":"Minimalist Essentials"},
+  "author":{"@type":"Person","name":"Minimalist Picks"}
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F9F9F7;color:#2C2C2C;font-family:'Inter',sans-serif;line-height:1.65;letter-spacing:0.01em;padding:20px}
+.container{max-width:720px;margin:0 auto}
+header{margin:60px 0 40px 0;text-align:center}
+header h1{font-family:'Playfair Display',serif;font-weight:400;font-size:28px;margin-bottom:8px}
+header p{color:#888;font-size:14px}
+.article{margin-bottom:50px;padding-bottom:30px;border-bottom:1px solid #E5E5E3}
+.article:last-child{border-bottom:none}
+.pain-point{color:#888;font-size:14px;margin-bottom:12px}
+.article-title{font-family:'Playfair Display',serif;font-weight:500;font-size:20px;margin-bottom:12px}
+.image-box{width:100%;height:0;padding-bottom:56.25%;background:#EFEFEF;border-radius:2px;margin-bottom:16px;position:relative;overflow:hidden}
+.image-box img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0}
+.intro{margin-bottom:16px;color:#2C2C2C}
+.amazon-keyword{display:inline-block;background:#F0F0EE;padding:8px 12px;border-radius:4px;cursor:pointer;margin-bottom:12px;font-size:14px}
+.stars{color:#888;font-size:14px;margin-bottom:12px}
+.share-btn{background:none;border:1px solid #E5E5E3;padding:6px 12px;border-radius:4px;font-size:14px;cursor:pointer;color:#2C2C2C}
+footer{margin-top:60px;text-align:center;font-size:12px;color:#888}
+.donation{margin-top:8px}
+.copied{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#2C2C2C;color:#fff;padding:6px 12px;border-radius:4px;opacity:0;transition:opacity 0.3s}
+.copied.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>Minimalist Picks</h1>
+<p>Quiet essentials. Simple living.</p>
+</header>
+
+<!-- ============================================= -->
+<!-- ARTICLE TEMPLATE – COPY & PASTE BELOW TO ADD NEW -->
+<!-- ============================================= -->
+<div class="article" data-date="2025-12-20" data-score="5">
+<div class="pain-point">Tired of cluttered countertops? Calm your space with one intentional piece.</div>
+<h2 class="article-title">Minimalist Ceramic Bowl</h2>
+<div class="image-box"><img src="placeholder.jpg" alt="Minimalist Ceramic Bowl"></div>
+<div class="intro">Clean lines, no logos, no patterns. Just calm, functional design for daily use.</div>
+<div class="amazon-keyword" onclick="copyKeyword(this)">minimalist ceramic bowl white</div>
+<div class="stars">★★★★★</div>
+<button class="share-btn" onclick="doShare()">Share</button>
+</div>
+<!-- END ARTICLE -->
+
+<div class="copied" id="copied">Copied!</div>
+
+<footer>
+<p>FTC Disclosure: Links may earn small commissions at no cost to you.</p>
+<div class="donation">Support: $2.50 placeholder</div>
+</footer>
+</div>
+
+<script>
+// COPY KEYWORD
+function copyKeyword(el){const text=el.innerText;navigator.clipboard.writeText(text);const msg=document.getElementById('copied');msg.classList.add('show');setTimeout(()=>msg.classList.remove('show'),1200)}
+
+// SHARE
+function doShare(){if(navigator.share){navigator.share({title:'Minimalist Picks',text:'Calm essentials for simple living',url:window.location.href})}}
+
+// SORT ARTICLES
+const articles=Array.from(document.querySelectorAll('.article'));
+const now=new Date();
+articles.sort((a,b)=>{
+const da=new Date(a.dataset.date),db=new Date(b.dataset.date);
+const aNew=(now-da)/(1000*60*60*24)<3;
+const bNew=(now-db)/(1000*60*60*24)<3;
+if(aNew&&!bNew)return -1;
+if(!aNew&&bNew)return 1;
+const sa=parseInt(a.dataset.score),sb=parseInt(b.dataset.score);
+if(sa!==sb)return sb-sa;
+return db-da;
+});
+const container=document.querySelector('.container');
+const header=document.querySelector('header');
+const footer=document.querySelector('footer');
+container.innerHTML='';
+container.appendChild(header);
+articles.forEach(art=>container.appendChild(art));
+container.appendChild(document.getElementById('copied'));
+container.appendChild(footer);
+</script>
+</body>
+</html>
