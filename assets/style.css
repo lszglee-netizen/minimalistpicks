@@ -361,7 +361,7 @@ hr { border: 0; border-top: 1px solid var(--c-line); margin: var(--space-7) 0; }
 .article-body blockquote p { margin: 0 0 .5em; }
 .article-body blockquote p:last-child { margin: 0; }
 
-.article-body a {
+..article-body a:not(.btn):not(.share-btn){
   color: var(--c-ink);
   text-decoration: underline;
   text-decoration-color: var(--c-line);
