@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>站点地图生成器 · MinimalistPicks Tools</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; max-width: 820px; margin: 40px auto; padding: 0 20px; color:#1f1f1d; background:#fafaf7; }
+    h1 { font-weight: 500; }
+    .step { background:#fff; border:1px solid #ececea; border-radius:10px; padding:18px 22px; margin:14px 0; }
+    .step b { display:block; margin-bottom:6px; }
+    textarea { width:100%; height:340px; font-family:ui-monospace, Menlo, monospace; font-size:12.5px; border:1px solid #ececea; border-radius:8px; padding:14px; box-sizing:border-box; background:#fff; }
+    button { background:#1f1f1d; color:#fafaf7; border:0; border-radius:999px; padding:10px 22px; font-size:.95rem; cursor:pointer; margin-top:10px; }
+    button.ghost { background:transparent; color:#1f1f1d; border:1px solid #ececea; }
+    .toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:#1f1f1d; color:#fafaf7; padding:10px 18px; border-radius:999px; opacity:0; transition:opacity .2s; }
+    .toast.show { opacity:1; }
+    code { background:#ececea; padding:1px 6px; border-radius:4px; font-size:.9em; }
+    .muted { color:#8a8a82; font-size:.9rem; }
+  </style>
+</head>
+<body>
+
+<h1>🗺️ 站点地图（sitemap.xml）一键更新</h1>
+<p class="muted">每次新增 / 删除文章后，点这里复制最新 sitemap，粘贴覆盖根目录的 <code>sitemap.xml</code> 即可。Google 会按这个文件去爬你的页面。</p>
+
+<div class="step">
+  <b>1. 复制下面方框里的全部内容</b>
+  <textarea id="out" readonly></textarea>
+  <button id="copy">📋 一键复制全部</button>
+  <button class="ghost" id="dl">⬇️ 下载为 sitemap.xml</button>
+</div>
+
+<div class="step">
+  <b>2. 打开根目录的 sitemap.xml，删掉里面所有旧内容，粘贴新的，保存</b>
+  <span class="muted">完事。把改动推送到 GitHub 就生效。</span>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="../config.js"></script>
+<script src="../articles.js"></script>
+<script>
+(async function(){
+  const C = window.SITE_CONFIG || {};
+  const SLUGS = window.ARTICLES || [];
+  const base = (C.siteUrl || 'https://example.com').replace(/\/$/, '');
+  const today = new Date().toISOString().slice(0,10);
+
+  // Fetch each post's frontmatter to get the real date for <lastmod>
+  async function fetchDate(slug) {
+    try {
+      const r = await fetch('../posts/' + slug + '.md');
+      if (!r.ok) return today;
+      const t = await r.text();
+      const m = t.match(/^---\s*\n([\s\S]*?)\n---/);
+      if (!m) return today;
+      const dm = m[1].match(/^\s*date\s*:\s*(.+)$/m);
+      return dm ? dm[1].trim() : today;
+    } catch { return today; }
+  }
+  const dates = await Promise.all(SLUGS.map(fetchDate));
+
+  const urls = [
+    { loc: base + '/',              changefreq:'daily',   priority:'1.0' },
+    { loc: base + '/about.html',    changefreq:'monthly', priority:'0.5' },
+    { loc: base + '/contact.html',  changefreq:'monthly', priority:'0.5' },
+    { loc: base + '/privacy.html',  changefreq:'yearly',  priority:'0.3' },
+    { loc: base + '/terms.html',    changefreq:'yearly',  priority:'0.3' }
+  ];
+  SLUGS.forEach((slug, i) => {
+    urls.push({
+      loc: base + '/article.html?slug=' + slug,
+      lastmod: dates[i],
+      changefreq: 'monthly',
+      priority: '0.9'
+    });
+  });
+
+  const xml =
+'<?xml version="1.0" encoding="UTF-8"?>\n' +
+'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+urls.map(u =>
+'  <url>\n' +
+'    <loc>' + u.loc + '</loc>\n' +
+(u.lastmod ? '    <lastmod>' + u.lastmod + '</lastmod>\n' : '') +
+'    <changefreq>' + u.changefreq + '</changefreq>\n' +
+'    <priority>' + u.priority + '</priority>\n' +
+'  </url>'
+).join('\n') +
+'\n</urlset>\n';
+
+  const ta = document.getElementById('out');
+  ta.value = xml;
+
+  function toast(m){
+    const t = document.getElementById('toast');
+    t.textContent = m; t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'), 1600);
+  }
+
+  document.getElementById('copy').onclick = async () => {
+    ta.select();
+    try { await navigator.clipboard.writeText(xml); toast('已复制到剪贴板'); }
+    catch { document.execCommand('copy'); toast('已复制'); }
+  };
+  document.getElementById('dl').onclick = () => {
+    const blob = new Blob([xml], { type: 'application/xml' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'sitemap.xml';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  };
+})();
+</script>
+</body>
+</html>

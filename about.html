@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#15161a" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="About MinimalistPicks — our editorial philosophy and how we choose products.">
+  <title>About · MinimalistPicks</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+Pro:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f1f1d'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23fafaf7'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="legal">
+
+  <div data-site-header></div>
+
+  <main>
+    <div class="container container--narrow legal-body">
+      <h1 data-page-title>About</h1>
+      <p>Welcome to <strong data-fill="siteName">MinimalistPicks</strong>. We are a small editorial team writing about the everyday objects that quietly make life better — the linen sheet, the heavy mug, the cable that never frays.</p>
+
+      <h2>What we believe</h2>
+      <p>Most "best of" lists are noise: dozens of options, padded specs, paid placements dressed as opinions. We believe the opposite — that you only need <em>one</em> good recommendation per category, and that it should be tested in real life, not in a spec sheet.</p>
+
+      <h2>How we pick</h2>
+      <ul>
+        <li>We buy products with our own money or borrow them from friends. We do not accept payment for placement.</li>
+        <li>We live with each item for at least two weeks before writing.</li>
+        <li>If we wouldn't recommend it to a close friend, we don't write about it.</li>
+      </ul>
+
+      <h2>How we make money</h2>
+      <p>This site contains affiliate links — when you buy through us, we may earn a small commission, at no extra cost to you. Those commissions keep the lights on so we can keep writing honestly. We also display contextual ads via Google AdSense.</p>
+
+      <h2>Get in touch</h2>
+      <p>Have a product we should test, or a story to share? Write to <a data-fill="contactEmail" href="#"></a>.</p>
+    </div>
+  </main>
+
+  <div data-site-footer></div>
+
+  <script src="config.js"></script>
+  <script src="articles.js"></script>
+  <script src="assets/main.js" defer></script>
+  <script>
+    // Fix mailto link after hydration
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const a = document.querySelector('a[data-fill="contactEmail"]');
+        if (a) a.href = 'mailto:' + (window.SITE_CONFIG?.contactEmail || '');
+      }, 0);
+    });
+  </script>
+</body>
+</html>

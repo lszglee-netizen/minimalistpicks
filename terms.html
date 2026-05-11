@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#15161a" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="Terms of service for MinimalistPicks.">
+  <title>Terms of Service · MinimalistPicks</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+Pro:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f1f1d'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23fafaf7'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="legal">
+
+  <div data-site-header></div>
+
+  <main>
+    <div class="container container--narrow legal-body">
+      <h1 data-page-title>Terms of Service</h1>
+      <p style="color:var(--c-ink-muted);">Last updated: <span data-fill="privacyDate"></span></p>
+
+      <p>By accessing <strong data-fill="siteName"></strong> (the "Site"), you agree to be bound by these Terms of Service. If you do not agree, please discontinue use of the Site.</p>
+
+      <h2>1. Editorial content</h2>
+      <p>All reviews, opinions, and recommendations on this Site are the personal views of the editorial team. They are provided for informational purposes only and do not constitute professional advice. Product availability, prices, and specifications change frequently — always confirm with the retailer before purchasing.</p>
+
+      <h2>2. Affiliate disclosure</h2>
+      <p data-fill="ftcDisclosure"></p>
+
+      <h2>3. No warranties</h2>
+      <p>The Site and its content are provided on an "as is" and "as available" basis, without warranties of any kind, either express or implied, including but not limited to merchantability, fitness for a particular purpose, or non-infringement.</p>
+
+      <h2>4. Limitation of liability</h2>
+      <p>To the maximum extent permitted by law, in no event shall the Site, its operators, or its contributors be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Site or any product purchased through it.</p>
+
+      <h2>5. Third-party links</h2>
+      <p>The Site contains links to third-party websites, including retailers and advertisers. We are not responsible for the content, privacy practices, or pricing of those third parties.</p>
+
+      <h2>6. Intellectual property</h2>
+      <p>All text, design, and original imagery on this Site are © <span id="yr"></span> <span data-fill="siteName"></span>. You may share short excerpts with attribution and a link back. Reproduction of full articles requires written permission.</p>
+
+      <h2>7. Changes</h2>
+      <p>We may update these Terms at any time. Continued use of the Site after changes constitutes acceptance of the revised Terms.</p>
+
+      <h2>8. Governing law</h2>
+      <p>These Terms are governed by the laws of <span data-fill="companyLocation"></span>, without regard to conflict of laws principles.</p>
+    </div>
+  </main>
+
+  <div data-site-footer></div>
+
+  <script src="config.js"></script>
+  <script src="articles.js"></script>
+  <script src="assets/main.js" defer></script>
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

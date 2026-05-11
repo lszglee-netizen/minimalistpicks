@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#15161a" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="Privacy policy for MinimalistPicks — how we handle data, cookies, and ads.">
+  <title>Privacy Policy · MinimalistPicks</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+Pro:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f1f1d'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23fafaf7'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="legal">
+
+  <div data-site-header></div>
+
+  <main>
+    <div class="container container--narrow legal-body">
+      <h1 data-page-title>Privacy Policy</h1>
+      <p style="color:var(--c-ink-muted);">Last updated: <span data-fill="privacyDate"></span></p>
+
+      <p>This Privacy Policy explains how <strong data-fill="siteName"></strong> ("we", "our", "us") collects, uses, and shares information about you when you visit our website.</p>
+
+      <h2>1. Information we collect</h2>
+      <p>We collect very little. Specifically:</p>
+      <ul>
+        <li><strong>Analytics:</strong> aggregated, anonymized data about pages visited, approximate location, device type, and referrer, via Google Analytics 4 (with IP anonymization enabled).</li>
+        <li><strong>Cookies:</strong> small text files stored on your device to remember preferences (such as cookie consent) and to serve relevant advertising. See the section on cookies below.</li>
+        <li><strong>Email:</strong> if you contact us by email, we keep the contents of that message to reply to you.</li>
+      </ul>
+      <p>We do <strong>not</strong> collect names, addresses, payment information, or any other personally identifying information through this site.</p>
+
+      <h2>2. Cookies & advertising</h2>
+      <p>We use Google AdSense to display advertisements. Google and other third-party vendors may use cookies to serve ads based on your prior visits to this and other websites. You can opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" rel="noopener" target="_blank">Google Ads Settings</a>.</p>
+      <p>Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to this website or other websites. Google's use of advertising cookies enables it and its partners to serve ads to users based on their visit to this site and/or other sites on the Internet.</p>
+
+      <h2>3. Affiliate links</h2>
+      <p>This site participates in the Amazon Services LLC Associates Program and other affiliate programs. When you click an affiliate link and make a qualifying purchase, we may earn a commission — at no additional cost to you. Affiliate links may set cookies on your device for tracking the transaction.</p>
+
+      <h2>4. Your rights (GDPR / CCPA)</h2>
+      <p>If you are a resident of the European Economic Area, the United Kingdom, or California, you have the right to access, correct, or request deletion of personal data we hold about you, and to opt out of the "sale" or "sharing" of personal information. To exercise these rights, email us at <a id="ce" data-fill="contactEmail" href="#"></a>.</p>
+
+      <h2>5. Children</h2>
+      <p>This site is not directed to children under 13 and we do not knowingly collect personal information from children.</p>
+
+      <h2>6. Changes</h2>
+      <p>We may update this policy from time to time. The "Last updated" date at the top reflects the most recent change. Material changes will be communicated via a notice on the site.</p>
+
+      <h2>7. Contact</h2>
+      <p>Questions? Email <a id="ce2" data-fill="contactEmail" href="#"></a>. We're located in <span data-fill="companyLocation"></span>.</p>
+    </div>
+  </main>
+
+  <div data-site-footer></div>
+
+  <script src="config.js"></script>
+  <script src="articles.js"></script>
+  <script src="assets/main.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        ['ce','ce2'].forEach(id => {
+          const a = document.getElementById(id);
+          if (a) a.href = 'mailto:' + (window.SITE_CONFIG?.contactEmail || '');
+        });
+      }, 0);
+    });
+  </script>
+</body>
+</html>
