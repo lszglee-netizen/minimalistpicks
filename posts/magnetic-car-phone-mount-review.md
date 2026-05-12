@@ -2,7 +2,7 @@
 title: I've Bought Six Car Phone Mounts. This One Has Lasted Three Years.
 date: 2026-04-26
 score: 4.7
-cover: https://images.unsplash.com/photo-1556800572-1b8aedf82dee?w=1200&q=80&auto=format&fit=crop
+cover: https://images.unsplash.com/photo-1736323325325-c23718ffebb4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
 intro: You're driving. The phone slides off the spring-clip mount and falls between the seats. You can't reach it. Google Maps is now narrating directions to your knees. You promise yourself you'll never buy a $9 phone mount again, and you mean it this time.
 amazonKeyword: magnetic car phone mount vent
 metaDesc: An honest review of the magnetic car phone mount — why magnetic beats spring-clip, what to know about phone cases, and three real downsides to consider.
