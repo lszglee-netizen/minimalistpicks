@@ -2,7 +2,7 @@
 title: The $12 Ice Roller That Replaced My Morning Coffee Routine (Sort Of)
 date: 2026-04-10
 score: 4.6
-cover: https://images.unsplash.com/photo-1607454347173-be0ed3f01ea3?w=1200&q=80&auto=format&fit=crop
+cover: https://images.unsplash.com/photo-1607454347173-be0ed3f01ea3?w=1200&q=80&auto=format&fit=crop](https://images.unsplash.com/flagged/photo-1570698574903-03be504b7034?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
 intro: You wake up. Your face looks puffy. Your eyes look small. You drank water, you slept eight hours, you don't know why this keeps happening. You also don't have $200 for a "lymphatic drainage facial."
 amazonKeyword: ice roller for face puffy eyes
 metaDesc: An honest review of the ice face roller — what it actually depuffs, how to use it correctly, and the three downsides nobody warns you about.
