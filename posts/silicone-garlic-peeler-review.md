@@ -1,7 +1,7 @@
 ---
 title: The $6 Silicone Tube That Made Me Cook More
 date: 2026-05-11
-score: 4.7
+score: 4.0
 cover: https://images.unsplash.com/photo-1582284540020-8acbe03f4924?w=1200&q=80&auto=format&fit=crop
 intro: You stand at the counter for ten minutes peeling six cloves of garlic. The skin gets stuck under your nails. Your hands smell for three days. There has to be a better way.
 amazonKeyword: silicone garlic peeler tube
