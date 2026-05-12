@@ -495,7 +495,9 @@
     });
   }
 
-  /* ----------------- Homepage ----------------- */
+  /* ----------------- Homepage (infinite scroll) ----------------- */
+  const HOME_STATE_KEY = 'mp_home_state';
+
   async function renderHome() {
     const heroH = qs('[data-hero-title]');
     const heroP = qs('[data-hero-tagline]');
@@ -510,11 +512,12 @@
       type:  'website'
     });
 
-    const grid = qs('[data-grid]');
-    const items = sortArticles(await loadAllArticles());
-    if (grid) grid.innerHTML = items.map(a => cardHTML(a)).join('') ||
-      `<p style="grid-column:1/-1;color:var(--c-ink-muted);text-align:center;padding:40px 0;">No articles yet.</p>`;
+    const perBatch = Math.max(1, parseInt(C.postsPerPage, 10) || 12);
+    const allItems = sortArticles(await loadAllArticles());
 
+    // SEO: emit full ItemList JSON-LD so Google sees every article even though
+    // only a slice is rendered. (Crawler doesn't scroll; sitemap.xml is the
+    // canonical discovery path, this is just an extra signal.)
     injectJsonLd({
       "@context": "https://schema.org",
       "@type": "WebSite",
@@ -524,12 +527,101 @@
     injectJsonLd({
       "@context": "https://schema.org",
       "@type": "ItemList",
-      "itemListElement": items.slice(0, 20).map((a, i) => ({
+      "itemListElement": allItems.slice(0, 50).map((a, i) => ({
         "@type": "ListItem",
         "position": i + 1,
         "url": absUrl('article.html?slug=' + a.meta.slug),
         "name": a.meta.title
       }))
+    });
+
+    const grid = qs('[data-grid]');
+    if (!grid) return;
+
+    if (allItems.length === 0) {
+      grid.innerHTML = `<p style="grid-column:1/-1;color:var(--c-ink-muted);text-align:center;padding:40px 0;">No articles yet.</p>`;
+      return;
+    }
+
+    grid.innerHTML = '';
+    let rendered = 0;
+    const renderBatch = () => {
+      const slice = allItems.slice(rendered, rendered + perBatch);
+      if (!slice.length) return false;
+      grid.insertAdjacentHTML('beforeend', slice.map(a => cardHTML(a)).join(''));
+      rendered += slice.length;
+      return rendered < allItems.length;
+    };
+
+    // —— State restore on back-navigation ——
+    // When user clicks a card and later hits Back, we want them to land where
+    // they were, not at the top of a freshly-rendered 12-card grid.
+    let initialBatches = 1;
+    let restoreScrollY = null;
+    try {
+      const nav = performance.getEntriesByType?.('navigation')?.[0];
+      const isBackForward = nav?.type === 'back_forward' || performance.navigation?.type === 2;
+      if (isBackForward) {
+        const raw = sessionStorage.getItem(HOME_STATE_KEY);
+        if (raw) {
+          const s = JSON.parse(raw);
+          initialBatches = Math.max(1, parseInt(s.batches, 10) || 1);
+          restoreScrollY = typeof s.scrollY === 'number' ? s.scrollY : null;
+        }
+      }
+    } catch (_) {}
+
+    // Initial render — restore enough batches to cover the saved scroll position
+    for (let i = 0; i < initialBatches; i++) {
+      if (!renderBatch()) break;
+    }
+
+    // Restore scroll position after layout settles
+    if (restoreScrollY != null) {
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: restoreScrollY, behavior: 'instant' });
+      });
+    }
+
+    // —— Infinite scroll sentinel ——
+    let sentinel = qs('.scroll-sentinel');
+    if (sentinel) sentinel.remove();
+    sentinel = el('div', { class: 'scroll-sentinel', 'aria-hidden': 'true' },
+      `<span class="scroll-sentinel__spinner"></span>`);
+    grid.insertAdjacentElement('afterend', sentinel);
+
+    if (rendered >= allItems.length) {
+      sentinel.style.display = 'none';
+    } else if ('IntersectionObserver' in window) {
+      const obs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          if (!renderBatch()) {
+            sentinel.style.display = 'none';
+            obs.disconnect();
+          }
+        }
+      }, { rootMargin: '800px 0px' });  // start loading 800px before sentinel hits viewport
+      obs.observe(sentinel);
+    } else {
+      // Fallback for ancient browsers: load everything at once
+      while (renderBatch()) { /* noop */ }
+      sentinel.style.display = 'none';
+    }
+
+    // —— Save state on navigation away ——
+    const saveState = () => {
+      try {
+        sessionStorage.setItem(HOME_STATE_KEY, JSON.stringify({
+          batches: Math.ceil(rendered / perBatch),
+          scrollY: window.scrollY
+        }));
+      } catch (_) {}
+    };
+    // pagehide is more reliable than beforeunload, and works on mobile/Safari
+    window.addEventListener('pagehide', saveState);
+    // Also save when a card is clicked (covers the common case)
+    grid.addEventListener('click', e => {
+      if (e.target.closest('a.card')) saveState();
     });
 
     injectAdsense();
