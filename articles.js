@@ -14,7 +14,6 @@
 window.ARTICLES = [
 
   /* —— 第一批 10 件 $20 以下小物（最近发布） —— */
-  "casio-f91w-digital-watch",
   "silicone-garlic-peeler-review",
   "tubshroom-drain-hair-catcher-review",
   "microfiber-hair-towel-wrap-review",
