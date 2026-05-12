@@ -15,7 +15,7 @@ Second winter, I installed a $15 door draft stopper. Heating bill: down about $8
 
 I did not believe a piece of foam wrapped in fabric could do this much.
 
-![A draft stopper installed at the base of a wooden interior door](https://images.unsplash.com/photo-1631880898728-15d6e8a5c1e0?w=1200&q=80&auto=format&fit=crop)
+![A draft stopper installed at the base of a wooden interior door](https://images.unsplash.com/photo-1552819401-700b5e342b9d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
 
 ## How it works
 
