@@ -13,6 +13,9 @@
 
 window.ARTICLES = [
 
+  /* —— 最新发布 —— */
+  "casio-f-91w-review",
+
   /* —— 第一批 10 件 $20 以下小物（最近发布） —— */
   "silicone-garlic-peeler-review",
   "tubshroom-drain-hair-catcher-review",
