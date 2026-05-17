@@ -731,18 +731,47 @@
 
     bindShareActions({ title: m.title, intro: m.intro });
 
-    injectJsonLd({
+    // Product schema with nested Review + AggregateRating.
+    // Why Product is the top type (not Review): Google's "Product snippet"
+    // feature validates the Product object, and a Product MUST include one of
+    // `offers`, `review`, or `aggregateRating`. With Review as the outer type,
+    // the nested `itemReviewed: Product` had none of those and triggered the
+    // "Either 'offers', 'review' or 'aggregateRating' should be specified"
+    // warning in Search Console for every article.
+    const _score = Number(m.score) || 0;
+    const productLd = {
       "@context": "https://schema.org",
-      "@type": "Review",
-      "itemReviewed": { "@type": "Product", "name": m.title, "image": absUrl(cover), "description": m.metaDesc || m.intro },
-      "reviewRating": { "@type": "Rating", "ratingValue": Number(m.score) || 0, "bestRating": 5 },
+      "@type": "Product",
       "name": m.title,
-      "author": { "@type": "Organization", "name": C.authorName || C.siteName },
-      "publisher": { "@type": "Organization", "name": C.siteName },
-      "datePublished": m.date,
+      "image": absUrl(cover),
+      "description": m.metaDesc || m.intro || '',
       "url": url,
-      "reviewBody": m.intro
-    });
+      "review": {
+        "@type": "Review",
+        "name": m.title,
+        "author":    { "@type": "Organization", "name": C.authorName || C.siteName },
+        "publisher": { "@type": "Organization", "name": C.siteName },
+        "datePublished": m.date,
+        "reviewBody": m.intro || '',
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": _score,
+          "bestRating": 5,
+          "worstRating": 1
+        }
+      }
+    };
+    if (_score > 0) {
+      productLd.aggregateRating = {
+        "@type": "AggregateRating",
+        "ratingValue": _score,
+        "bestRating": 5,
+        "worstRating": 1,
+        "ratingCount": 1,
+        "reviewCount": 1
+      };
+    }
+    injectJsonLd(productLd);
     injectJsonLd({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
