@@ -2,7 +2,7 @@
 title: Four Years With a $15 Casio F-91W — The Honest Review
 date: 2026-05-17
 score: 4.6
-cover: https://images.unsplash.com/photo-1481349518771-20055b2a7b24?w=1200&q=80&auto=format&fit=crop
+cover: https://i.ibb.co/cc8ssshZ/Screen-Shot-2026-05-17-141126-284.png
 intro: I bought a Casio F-91W in 2022 for the price of two coffees. I have not taken it off, except to shower and sleep, in four years. Here is everything that is good about it, and the small handful of things that genuinely aren't.
 amazonKeyword: casio f-91w classic digital watch
 metaDesc: A long-term, honest review of the Casio F-91W after four years of daily wear. What still works after 37 years on the market, what doesn't, and who it's really for.
@@ -13,7 +13,7 @@ The Casio F-91W has been in continuous production since 1989. That is older than
 
 I bought mine because I was tired of charging an Apple Watch every night, tired of glancing at it during conversations, tired of treating a wristwatch like a phone. Four years later, I still wear it every day.
 
-![A black plastic digital watch resting on a wooden desk next to a notebook](https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&q=80&auto=format&fit=crop)
+![A black plastic digital watch resting on a wooden desk next to a notebook](https://i.ibb.co/B5v1k8tj/Screen-Shot-2026-05-17-141239-783.png)
 
 ## What it is
 
